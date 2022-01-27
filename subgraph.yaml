@@ -1,0 +1,40 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: GNS
+    network: mainnet
+    source:
+      address: "0xadca0dd4729c8ba3acf3e99f3a9f471ef37b6825" # proxy to GNS contract
+      # address: "0x8f0031c8a936e3f78db1e0670135ccad27e5b689" # GNS Contract
+      abi: GNS
+      startBlock: 11446781
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - NSignalMinted
+        - NSignalBurned
+        - GRTWithdrawn
+        - SubgraphDeprecated
+        - SubgraphMetadataUpdated
+        - SubgraphPublished
+      abis:
+        - name: GNS
+          file: ./abis/GNS.json
+      eventHandlers:
+        - event: NSignalMinted(indexed address,indexed uint256,indexed address,uint256,uint256,uint256)
+          handler: handleNSignalMinted
+        - event: NSignalBurned(indexed address,indexed uint256,indexed address,uint256,uint256,uint256)
+          handler: handleNSignalBurned
+        - event: GRTWithdrawn(indexed address,indexed uint256,indexed address,uint256,uint256)
+          handler: handleGRTWithdrawn
+        - event: SubgraphDeprecated(indexed address,indexed uint256)
+          handler: handleSubgraphDeprecated
+        - event: SubgraphMetadataUpdated(indexed address,indexed uint256,bytes32)
+          handler: handleSubgraphMetadataUpdated
+        - event: SubgraphPublished(indexed address,indexed uint256,indexed bytes32,bytes32)
+          handler: handleSubgraphPublished
+      file: ./src/mapping.ts

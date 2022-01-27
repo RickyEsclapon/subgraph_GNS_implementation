@@ -1,0 +1,49 @@
+type NSignalMinted @entity {
+  id: ID!
+  graphAccount: Bytes! # address
+  subgraphNumber: BigInt! # uint256
+  nameCurator: Bytes! # address
+  nSignalCreated: BigInt! # uint256
+  vSignalCreated: BigInt! # uint256
+  tokensDeposited: BigInt! # uint256
+}
+
+type NSignalBurned @entity {
+  id: ID!
+  graphAccount: Bytes! # address
+  subgraphNumber: BigInt! # uint256
+  nameCurator: Bytes! # address
+  nSignalBurnt: BigInt! # uint256
+  vSignalBurnt: BigInt! # uint256
+  tokensReceived: BigInt! # uint256
+}
+
+type GRTWithdrawn @entity {
+  id: ID!
+  graphAccount: Bytes! # address
+  subgraphNumber: BigInt! # uint256
+  nameCurator: Bytes! # address
+  nSignalBurnt: BigInt! # uint256
+  withdrawnGRT: BigInt! # uint256
+}
+
+type SubgraphDeprecated @entity {
+  id: ID!
+  graphAccount: Bytes! # address
+  subgraphNumber: BigInt! # uint256
+}
+
+type SubgraphMetadataUpdated @entity {
+  id: ID!
+  graphAccount: Bytes! # address
+  subgraphNumber: BigInt! # uint256
+  subgraphMetadata: Bytes! # bytes32
+}
+
+type SubgraphPublished @entity {
+  id: ID!
+  graphAccount: Bytes! # address
+  subgraphNumber: BigInt! # uint256
+  subgraphDeploymentID: Bytes! # bytes32
+  versionMetadata: Bytes! # bytes32
+}
